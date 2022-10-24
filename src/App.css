@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+
+.logo {
+  height: 25px;
+  width: 25px;
+  padding-right: 5px;
+}
+
+.saludo:hover {
+  background-color: lightcoral;
+  font-size: 50px;
+}
