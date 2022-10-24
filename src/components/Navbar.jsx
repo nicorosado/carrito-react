@@ -13,7 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import Cartwidget from "./CartWidget";
 
-const pages = ["Productos"];
+const pages = ["Productos", "Sobre Nosotros"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function ResponsiveAppBar() {
@@ -48,6 +48,7 @@ function ResponsiveAppBar() {
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
+              flexGrow: 1,
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
@@ -58,7 +59,9 @@ function ResponsiveAppBar() {
             PetShop
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box
+            sx={{ /*  flexGrow: 1,  */ display: { xs: "flex", md: "none" } }}
+          >
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -103,7 +106,7 @@ function ResponsiveAppBar() {
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
-              flexGrow: 1,
+              /* flexGrow: 1, */
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
