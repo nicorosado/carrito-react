@@ -47,3 +47,10 @@
   background-color: lightcoral;
   font-size: 50px;
 }
+
+.logo-carrito {
+  height: 35px;
+  width: 35px;
+  padding-right: 10px;
+  padding-bottom: 3px;
+}

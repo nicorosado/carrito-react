@@ -1,5 +1,5 @@
-import img from "../img/dog.svg";
-function CartWidget() {
-  return <img className="logo" alt="Your logo." src={img} />;
+import { BsFillCartFill } from "react-icons/bs";
+function Cartwidget() {
+  return <BsFillCartFill className="logo-carrito" />;
 }
-export default CartWidget;
+export default Cartwidget;
