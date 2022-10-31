@@ -54,3 +54,11 @@
   padding-right: 10px;
   padding-bottom: 3px;
 }
+
+.counter {
+  width: fit-content;
+  background-color: #4a95c7;
+  margin: auto;
+  padding: 1rem;
+  text-align: center;
+}
