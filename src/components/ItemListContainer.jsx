@@ -5,52 +5,54 @@ export default greeting;
  */
 import React, { useState, useEffect } from "react";
 import "../App.css";
-import ItemCount from "./ItemCount";
-import { Title } from "@mui/icons-material";
 import ItemList from "./ItemList";
+import cepillo from "../img/cepillo.jpg";
+import pretal from "../img/pretal.jpg";
+import alimento from "../img/alimento.jpg";
+import { useParams } from "react-router-dom";
 
 const productos = [
   {
     id: 1,
-    image:
-      "https://http2.mlstatic.com/D_NQ_NP_851237-MLA48704008171_122021-O.webp",
-    title: "cepillo",
+    image: cepillo,
+    title: "Cepillo",
+    category: "salud",
   },
   {
     id: 2,
-    image:
-      "https://http2.mlstatic.com/D_NQ_NP_851237-MLA48704008171_122021-O.webp",
-    title: "pretal",
+    image: pretal,
+    title: "Pretal",
+    category: "salud",
   },
   {
     id: 3,
-    image:
-      "https://http2.mlstatic.com/D_NQ_NP_851237-MLA48704008171_122021-O.webp",
-    title: "alimento",
+    image: alimento,
+    title: "Alimento",
+    category: "alimento",
   },
 ];
 
 export const ItemListContainer = ({ texto }) => {
+  const { idcategory } = useParams();
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    const GetData = new Promise((resolve) => {
+    const getData = new Promise((resolve) => {
       setTimeout(() => {
         resolve(productos);
       }, 2000);
     });
-    GetData.then((res) => setData(res));
-  }, []);
+    getData.then((res) => {
+      if (idcategory) {
+        setData(res.filter((item) => item.category === idcategory));
+      } else {
+        setData(res);
+      }
+      setIsLoading(false);
+    });
+  }, [idcategory]);
 
-  const onAdd = (cantidad) => {
-    console.log(`Compraste ${cantidad} unidades`);
-  };
-  return (
-    <>
-      <Title greeting={texto} />
-      <ItemCount initial={1} stock={5} onAdd={onAdd} />
-      <ItemList data={data} />
-    </>
-  );
+  return isLoading ? <div>Loading...</div> : <ItemList data={data} />;
 };
 
 export default ItemListContainer;

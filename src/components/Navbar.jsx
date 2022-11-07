@@ -7,17 +7,22 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import LogoWidget from "./LogoWidget";
 import Cartwidget from "./CartWidget";
+import { Link } from "react-router-dom";
 
-const pages = ["Productos", "Sobre Nosotros"];
+const pages = [
+  { label: "Home", link: "/" },
+  { label: "Checkout", link: "/checkout" },
+  { label: "Contacto", link: "/contacto" },
+  { label: "alimento", link: "/category/alimento" },
+  { label: "salud", link: "/category/salud" },
+];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
-
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -39,8 +44,8 @@ function ResponsiveAppBar() {
 
   return (
     <AppBar position="static" style={{ backgroundColor: "#357299" }}>
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
+      <Container>
+        <Toolbar>
           <LogoWidget />
           <Typography
             variant="h6"
@@ -93,8 +98,10 @@ function ResponsiveAppBar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem key={page.label} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <Link to={page.link}>{page.label}</Link>
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -121,19 +128,21 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
-                key={page}
+                key={page.label}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                {page}
+                <Link to={page.link} className="links">
+                  {page.label}
+                </Link>
               </Button>
             ))}
           </Box>
-          <Cartwidget />
+
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Cartwidget />
               </IconButton>
             </Tooltip>
             <Menu

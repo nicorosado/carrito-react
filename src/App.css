@@ -1,3 +1,7 @@
+body {
+  background-color: #efe4c2;
+}
+
 .App {
   text-align: center;
 }
@@ -43,11 +47,6 @@
   padding-right: 5px;
 }
 
-.saludo:hover {
-  background-color: lightcoral;
-  font-size: 50px;
-}
-
 .logo-carrito {
   height: 35px;
   width: 35px;
@@ -57,8 +56,28 @@
 
 .counter {
   width: fit-content;
-  background-color: #4a95c7;
+  background-color: #efe4c2;
   margin: auto;
   padding: 1rem;
   text-align: center;
+}
+
+.links:visited {
+  text-decoration: none;
+  color: black;
+}
+
+.itemsgrid {
+  display: flex;
+  flex-flow: wrap;
+}
+
+.cardContainer {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.card {
+  margin: 30px;
 }

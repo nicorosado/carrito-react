@@ -1,7 +1,14 @@
 import Item from "./Item";
-import React from "react";
+import * as React from "react";
+import Box from "@mui/material/Box";
 
 const ItemList = ({ data = [] }) => {
-  data.map((producto) => <Item key={producto.id} info={producto} />);
+  return (
+    <Box className="cardContainer">
+      {data.map((producto) => (
+        <Item key={producto.id} info={producto} />
+      ))}
+    </Box>
+  );
 };
 export default ItemList;
