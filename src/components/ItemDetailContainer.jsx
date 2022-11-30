@@ -1,48 +1,20 @@
 import React, { useState, useEffect } from "react";
 import ItemDetail from "./ItemDetail";
-import cepillo from "../img/cepillo.jpg";
-import { useParams } from "react-router-dom";
-import pretal from "../img/pretal.jpg";
-import alimento from "../img/alimento.jpg";
 
-const productos = [
-  {
-    id: "1",
-    image: cepillo,
-    title: "Cepillo",
-    category: "salud",
-  },
-  {
-    id: "2",
-    image: pretal,
-    title: "Pretal",
-    category: "salud",
-  },
-  {
-    id: "3",
-    image: alimento,
-    title: "Alimento",
-    category: "alimento",
-  },
-];
+import { useParams } from "react-router-dom";
+
+import { getFirestore, doc, getDoc } from "firebase/firestore";
 
 export const ItemDetailContainer = () => {
   const { iditem } = useParams();
   const [data, setData] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    const getData = new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(productos.find((item) => item.id === iditem));
-      }, 2000);
-    });
-    getData.then((res) => {
-      setData(res);
-      setIsLoading(false);
-    });
+    const querydb = getFirestore();
+    const queryDoc = doc(querydb, "productos", iditem);
+    getDoc(queryDoc).then((res) => setData({ id: res.id, ...res.data() }));
   }, [iditem]);
 
-  return isLoading ? <div>Loading...</div> : <ItemDetail data={data} />;
+  return <ItemDetail data={data} />;
 };
 
 export default ItemDetailContainer;

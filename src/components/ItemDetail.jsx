@@ -1,27 +1,40 @@
 import React from "react";
 import "../App.css";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import ItemCount from "./ItemCount";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useCartContext } from "../context/CartContext";
 
 export const ItemDetail = ({ data }) => {
+  const [goToCart, setGoToCart] = useState(false);
+  const { addProduct } = useCartContext();
+  const onAdd = (quantity) => {
+    setGoToCart(true);
+    addProduct(data, quantity);
+  };
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 350 }}>
       <CardMedia component="img" image={data.image} alt="" />
       <CardContent>
+        <Typography gutterBottom variant="h4" component="div">
+          {data.title}
+        </Typography>
         <Typography gutterBottom variant="h5" component="div">
-          <h2>{data.title}</h2>
+          Precio: ${data.price}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          <p>{data.category}</p>
+          {data.category}
         </Typography>
+        {goToCart ? (
+          <Link to="/cart">Terminar compra</Link>
+        ) : (
+          <ItemCount initial={1} stock={data.stock} onAdd={onAdd} />
+        )}
       </CardContent>
-      <CardActions>
-        <Button size="small">Comprar</Button>
-      </CardActions>
     </Card>
   );
 };

@@ -1,5 +1,12 @@
 import { BsFillCartFill } from "react-icons/bs";
-function Cartwidget() {
-  return <BsFillCartFill className="logo-carrito" />;
-}
+import { useCartContext } from "../context/CartContext";
+export const Cartwidget = () => {
+  const { totalProducts } = useCartContext();
+  return (
+    <>
+      <span>{totalProducts() || ""}</span>
+      <BsFillCartFill className="logo-carrito" />
+    </>
+  );
+};
 export default Cartwidget;
